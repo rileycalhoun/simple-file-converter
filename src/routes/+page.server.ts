@@ -8,6 +8,8 @@ import { CLOUD_CONVERT_API_KEY } from '$env/static/private';
 import { dbConnect, dbDisconnect } from '$lib/db';
 import { FileModel } from '../models/FileModel';
 
+import { base } from '$app/paths';
+
 const cloudConvert = new CloudConvert(CLOUD_CONVERT_API_KEY);
 
 export const actions = {
@@ -106,6 +108,6 @@ export const actions = {
                 });
             }
 
-            throw redirect(303, '/files/' + id);
+            throw redirect(303, base + '/files/' + id);
         }
 } satisfies Actions;
