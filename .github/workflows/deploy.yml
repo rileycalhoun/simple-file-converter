@@ -23,6 +23,9 @@ jobs:
       - name: Build
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
+          CLOUD_CONVERT_API_KEY: ${{ secrets.CLOUD_CONVERT_API_KEY }}
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+
         run: |
           npm run build
         
