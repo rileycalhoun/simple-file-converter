@@ -1,51 +1,12 @@
 <script lang="ts">
-	import { goto } from "$app/navigation";
-    import { writable } from "svelte/store";
-
+    import { enhance } from "$app/forms";
     const authorizedExtensions = [ ".jpg", ".jpeg", ".png", ".pptx", ".docx" ]
-
-    const isLoading = writable(false);
-    var errorMessage = ""
-
-    let form: HTMLFormElement
-
-    async function handleSubmit() {
-        isLoading.set(true);
-
-        const formData = new FormData(form)
-
-        try {
-            const response = await fetch('/', {
-                method: 'POST',
-                body: formData
-            });
-
-            console.log(response);
-
-            if(response.redirected) {
-                return goto(response.url);
-            } else {
-                const data = await response.json();
-                errorMessage = data.message;
-            }
-        } catch(e: any) {
-            errorMessage = e.message;
-        } finally {
-            isLoading.set(false);
-        }
-    }
 </script>
 
 <body>
     <h1>PDF Converter</h1>
 
-    {#if errorMessage.length > 0}
-        <div class="error">
-            <h2>{errorMessage}</h2>
-        </div>
-    {/if}
-
-    <form bind:this={form} on:submit={handleSubmit} enctype="multipart/form-data" >
+    <form use:enhance method="POST" enctype="multipart/form-data" >
         <div class="file-options">
             <input type="file" id="file" name="uploadedFile" accept={authorizedExtensions.join(",")} required />
             <select name="format" required>
