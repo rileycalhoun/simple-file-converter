@@ -34,6 +34,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-cloudflare": "^2.3.4",
 		"@sveltejs/adapter-static": "^2.0.3",
 		"@types/base64-stream": "^1.0.5",
 		"@types/cors": "^2.8.17",
