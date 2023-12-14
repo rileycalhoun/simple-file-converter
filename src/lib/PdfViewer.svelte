@@ -1,5 +1,4 @@
 <script lang="ts">
-
     export let base64: string;
     export let downloadName: string;
 </script>

@@ -1,12 +1,12 @@
 <script lang="ts">
     import { enhance } from "$app/forms";
-    const authorizedExtensions = [ ".jpg", ".jpeg", ".png", ".pptx", ".docx" ]
+    const authorizedExtensions = [ ".jpg", ".jpeg", ".png", ".pptx", ".docx", ".pdf" ]
 </script>
 
 <body>
     <h1>PDF Converter</h1>
 
-    <form use:enhance method="POST" enctype="multipart/form-data" >
+    <form method="POST" use:enhance enctype="multipart/form-data">
         <div class="file-options">
             <input type="file" id="file" name="uploadedFile" accept={authorizedExtensions.join(",")} required />
             <select name="format" required>
@@ -39,19 +39,6 @@
         font-size: 2.5em;
         color: #333;
         margin-bottom: 40px;
-    }
-
-    div.error {
-        color: #d9534f;
-        font-weight: bold;
-        margin: 10px 0;
-        padding: 12px;
-        border-radius: 8px;
-        background-color: #f2dede;
-        border: 1px solid #d9534f; /* Added border for emphasis */
-        width: 80%;
-        max-width: 500px;
-        text-align: center; /* Centering the text */
     }
 
     form {
