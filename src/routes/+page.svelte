@@ -1,12 +1,11 @@
 <script lang="ts">
-    import { enhance } from "$app/forms";
     const authorizedExtensions = [ ".jpg", ".jpeg", ".png", ".pptx", ".docx", ".pdf" ]
 </script>
 
 <body>
     <h1>PDF Converter</h1>
 
-    <form method="POST" use:enhance enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
         <div class="file-options">
             <input type="file" id="file" name="uploadedFile" accept={authorizedExtensions.join(",")} required />
             <select name="format" required>
