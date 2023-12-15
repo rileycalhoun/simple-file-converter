@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-node';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -7,13 +7,9 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			routes: {
-				pages: 'build',
-				assets: 'build',
-				fallback: undefined,
-				precompress: false,
-				strict: true
-			}
+			out: "build",
+			envPrefix: "",
+			precompress: false
 		})
 	}
 };
