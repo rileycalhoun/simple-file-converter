@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import type { FileModelType } from '../types/types.ts';
+import type { FileModelType } from '../types/types.js';
 
 const FileSchema = new mongoose.Schema<FileModelType>({
     name: { type: String, required: true },

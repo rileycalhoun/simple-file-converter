@@ -9,7 +9,7 @@ const config = {
 		adapter: adapter({
 			out: "build",
 			envPrefix: "",
-			precompress: false
+			precompress: false,
 		})
 	}
 };
