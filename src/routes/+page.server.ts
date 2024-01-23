@@ -89,8 +89,9 @@ export const actions = {
                 await new Promise(resolve => setTimeout(resolve, 1000));
             }
 
-            let newFileName = uploadedFile.name.split('.').slice(0, -1).join('.') + '.pdf';
-                
+            let newFileName = uploadedFile.name.split('.').slice(0, -1).join('.') + '.' + format.toLowerCase();
+            console.log(newFileName);   
+            
             const newFile = {
                 name: newFileName,
                 base64: chunks.join('')
