@@ -4,7 +4,6 @@
 
     let mime: string;
     let extension = downloadName.split('.').reverse()[0];
-    console.log(extension);
     
     switch(extension.toLowerCase()) {
       case "pdf":

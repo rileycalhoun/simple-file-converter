@@ -1,34 +1,44 @@
 import mongoose from 'mongoose';
 import { MONGO_URI } from '$env/static/private';
 
-var isConnected: number = 0;
+var isConnected: boolean = false;
 
 export const dbConnect = async () => {
-  console.log('MONGO_URL', MONGO_URI);
-  if (isConnected === 1) {
+  if (isConnected) {
     console.log('Connection was already established');
     return;
   }
 
   if (mongoose.connections.length > 0) {
-    isConnected = mongoose.connections[0].readyState;
-    if (isConnected === 1) {
+    switch (mongoose.connections[0].readyState) {
+      case 1:
+        isConnected = true;
+        break;
+      default:
+        isConnected = false;
+        break;
+    }
+
+    if (isConnected) {
       console.log('Connection was already established');
       return;
     }
 
     await mongoose.disconnect();
   }
+
   await mongoose.connect(MONGO_URI ?? '');
-  isConnected = 1;
+  isConnected = true;
+
   console.log('Connected to mongo', MONGO_URI ?? '');
 };
 
 export const dbDisconnect = async () => {
   if (process.env.NODE_ENV === 'development') return;
-  if (isConnected === 0) return;
+  if (!isConnected) return;
 
   await mongoose.disconnect();
-  isConnected = 0;
+  isConnected = false;
+
   console.log('Disconnected from mongo');
 };
