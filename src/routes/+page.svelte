@@ -24,12 +24,13 @@
             accept={authorizedExtensions.join(",")}
             required 
         />
-
-        <select name="format" class="bebas-neue-regular" required>
-            <option value="pdf">PDF</option>
-            <option value="docx">DOCX</option>
-            <option value="pptx">PPTX</option>
-        </select>
+        <div id="select">
+            <select name="format" class="bebas-neue-regular" required>
+                <option value="pdf">PDF</option>
+                <option value="docx">DOCX</option>
+                <option value="pptx">PPTX</option>
+            </select>
+        </div>
         <button class="bebas-neue-regular">
             Convert
         </button>
@@ -73,51 +74,46 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        
-        width: 80%;
-        max-width: 600px; /* Slightly increased max-width */
-        
-        padding: 20px; /* Padding inside the form */
-        border-radius: 10px; /* Rounded corners for the form */
+       
+        padding: 20px;
+        border-radius: 10px;
     
-        background: #ffc1cc; /* White background for form */
+        background: #ffc1cc;
     }
 
-    form>input, form>select {
+    form>div#select {
+        display: flex;
+        flex-direction: row;
+    }
+
+    form>input, form>div>select {
         padding: 12px 15px;
         border-radius: 8px;
         font-size: 1.1em;
         margin-bottom: 15px;
-        width: 100%;
         box-sizing: border-box;
         transition: border-color 0.3s, box-shadow 0.3s;
     }
 
-    form>select {
+    form>div>select {
         appearance: none;
         border: 0px;
         text-align: center;
-    }
-
-    form>input:focus, form>select:focus {
-        border-color: #007bff;
-        outline: none;
-        box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3); /* Shadow on focus for emphasis */
     }
 
     form>button {
         padding: 12px 25px;
         border: none;
         border-radius: 8px;
-        background-color: #007bff;
-        color: #fff;
+        background-color: #d8bfd8;
+        color: #333;
         font-size: 1.1em;
         cursor: pointer;
         transition: background-color 0.3s, transform 0.2s;
     }
 
     form>button:hover {
-        background-color: #0056b3;
+        background-color: #9955bb;
         transform: translateY(-2px); /* Slight lift on hover */
     }
 
@@ -132,5 +128,4 @@
         font-weight: 600;
         font-style: normal;
     }
-
 </style>
