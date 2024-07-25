@@ -5,7 +5,6 @@ var isConnected: boolean = false;
 
 export const dbConnect = async () => {
   if (isConnected) {
-    console.log('Connection was already established');
     return;
   }
 
@@ -20,7 +19,6 @@ export const dbConnect = async () => {
     }
 
     if (isConnected) {
-      console.log('Connection was already established');
       return;
     }
 
@@ -30,7 +28,7 @@ export const dbConnect = async () => {
   await mongoose.connect(MONGO_URI ?? '');
   isConnected = true;
 
-  console.log('Connected to mongo', MONGO_URI ?? '');
+  console.log('Connected to Mongo Database at ', MONGO_URI ?? '');
 };
 
 export const dbDisconnect = async () => {
@@ -40,5 +38,5 @@ export const dbDisconnect = async () => {
   await mongoose.disconnect();
   isConnected = false;
 
-  console.log('Disconnected from mongo');
+  console.log('Disconnected from Mongo!');
 };

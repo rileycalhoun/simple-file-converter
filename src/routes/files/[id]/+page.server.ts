@@ -10,13 +10,13 @@ export var load: ServerLoad = async ({ params }) => {
 
     let file = await FileModel.findOne({ _id: id});
     if(!file) {
-        console.error("no file was provided");
+        console.warn(`Unable to to load file at /${id}`)
         throw redirect(303, base + '/');
     }
 
     await dbDisconnect();
 
-    console.log("loaded file, " + file.name);
+    console.log(`Loaded file: ${file.name}`)
     return {
         props: {
             file: {

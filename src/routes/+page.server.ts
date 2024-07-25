@@ -20,7 +20,6 @@ export const actions = {
             !(formData.uploadedFile as File).name ||
             (formData.uploadedFile as File).name === 'undefined'
         ) {
-            console.log(`unable to convert: did not select file`)
             return fail(400, {
                 error: true,
                 message: 'You dumb bitch, add a fucking file!'
@@ -30,7 +29,6 @@ export const actions = {
         const { uploadedFile, format } = formData as { uploadedFile: File, format: string };
 
         if(!format) {
-            console.log(`unable to convert file ${uploadedFile.name}: did not select format`)
             return fail(500, {
                 error: true,
                 message: "You dumb bitch, select a fucking format!"
@@ -63,7 +61,7 @@ export const actions = {
 
         let url = file.url;
         if(!url) {
-            console.log(`unable to convert file ${uploadedFile.name}: url is undefined`);
+            console.error(`Unable to convert file ${uploadedFile.name}: URL does not exist!`);
             return fail(500, {
                 error: true,
                 message: 'Something went wrong while converting your file!'
@@ -71,13 +69,12 @@ export const actions = {
         }
 
         // Convert the file to base64
-        
         let id: string | undefined = undefined;
         var chunks: [String] = [""];
         let downloadJob = request(url).pipe(new Base64Encode())
             .on('data', (chunk) => chunks.push(chunk))
-            .on('error', () => {
-                console.log(`unable to convert file ${uploadedFile.name}: error while converting file`);
+            .on('error', (err) => {
+                console.error(`Unable to convert file ${uploadedFile.name}:`, err)
                 return fail(500, {
                     error: true,
                     message: 'Something went wrong while converting your file!'
@@ -90,7 +87,6 @@ export const actions = {
             }
 
             let newFileName = uploadedFile.name.split('.').slice(0, -1).join('.') + '.' + format.toLowerCase();
-            console.log(newFileName);   
             
             const newFile = {
                 name: newFileName,
@@ -106,14 +102,13 @@ export const actions = {
             id = fileModel._id;
 
             if(id == undefined) {
-                console.log(`unable to convert file ${uploadedFile.name}: id is undefined`);
+                console.error(`Unable to convert file ${uploadedFile.name}: ID is undefined`);
                 return fail(500, {
                     error: true,
                     message: 'Something went wrong while converting your file!'
                 });
             }
 
-            console.log("redirecting to " + `${base}/files/${id}`)
             throw redirect(302, `${base}/files/${id}`);
         }
 } satisfies Actions;

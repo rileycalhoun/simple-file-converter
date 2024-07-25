@@ -3,8 +3,10 @@
         ".jpg",
         ".jpeg",
         ".png",
+        ".ppt",
         ".pptx",
         ".docx",
+        ".doc",
         ".pdf"
     ];
 </script>
